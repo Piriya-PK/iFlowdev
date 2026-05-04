@@ -1,9 +1,18 @@
-function go(n){
+const pages=['home','services','portfolio','about','contact'];
+function go(n,updateUrl=true){
+  if(!pages.includes(n))n='home';
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('on'));
   const pg=document.getElementById('page-'+n);
   const nl=document.getElementById('nl-'+n);
-  if(pg){pg.classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+  if(pg){
+    pg.classList.add('on');
+    if(updateUrl){
+      const hash=n==='home'?'':('#'+n);
+      history.pushState(null,'',location.pathname+hash);
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
   if(nl)nl.classList.add('on');
   setTimeout(rev,100);
 }
@@ -28,4 +37,10 @@ function rev(){
     els.forEach(el=>ob.observe(el));
   } else {els.forEach(el=>el.classList.add('in'))}
 }
-document.addEventListener('DOMContentLoaded',rev);
+function routeFromHash(){
+  const n=location.hash.replace('#','')||'home';
+  go(pages.includes(n)?n:'home',false);
+}
+window.addEventListener('hashchange',routeFromHash);
+window.addEventListener('popstate',routeFromHash);
+document.addEventListener('DOMContentLoaded',routeFromHash);
