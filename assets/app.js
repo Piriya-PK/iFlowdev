@@ -10,13 +10,13 @@ function go(n){
 function toggleMob(){document.getElementById('mob').classList.toggle('open')}
 function setLang(l){
   const b=document.body;
-  document.querySelectorAll('#btn-en,#mb-en,#btn-zh,#mb-zh').forEach(el=>el.classList.remove('on'));
+  document.querySelectorAll('#btn-en,#btn-zh').forEach(el=>el.classList.remove('on'));
   if(l==='zh'){
     b.classList.add('zh-mode');
-    document.querySelectorAll('#btn-zh,#mb-zh').forEach(el=>el.classList.add('on'));
+    document.querySelectorAll('#btn-zh').forEach(el=>el.classList.add('on'));
   } else {
     b.classList.remove('zh-mode');
-    document.querySelectorAll('#btn-en,#mb-en').forEach(el=>el.classList.add('on'));
+    document.querySelectorAll('#btn-en').forEach(el=>el.classList.add('on'));
   }
 }
 function rev(){
