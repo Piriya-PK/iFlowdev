@@ -27,6 +27,12 @@ function setLang(l){
     b.classList.remove('zh-mode');
     document.querySelectorAll('#btn-en').forEach(el=>el.classList.add('on'));
   }
+  document.querySelectorAll('[data-en-placeholder][data-zh-placeholder]').forEach(el=>{
+    el.setAttribute('placeholder',el.dataset[l+'Placeholder']);
+  });
+  document.querySelectorAll('[data-en-text][data-zh-text]').forEach(el=>{
+    el.textContent=el.dataset[l+'Text'];
+  });
 }
 function rev(){
   const els=document.querySelectorAll('.page.on .reveal:not(.in)');
